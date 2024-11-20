@@ -65,14 +65,23 @@ export class FriendListComponent implements OnInit {
   }
 
   private sortByBirthday(a: Friend, b: Friend): number {
-    if (a.birthMonth !== b.birthMonth) {
-      return a.birthMonth - b.birthMonth;
+    const getDateComponents = (obj: Friend) => {
+      return {
+        month: parseInt(String(obj.birthMonth), 10),
+        day: parseInt(String(obj.birthDay), 10),
+        year: obj.birthYear ? parseInt(String(obj.birthYear), 10) : Infinity,
+      };
+    };
+    const aDate = getDateComponents(a);
+    const bDate = getDateComponents(b);
+    if (aDate.month !== bDate.month) {
+      return aDate.month - bDate.month;
     }
 
-    if (a.birthDay !== b.birthDay) {
-      return a.birthDay - b.birthDay;
+    if (aDate.day !== bDate.day) {
+      return aDate.day - bDate.day;
     }
 
-    return (a.birthYear || Infinity) - (b.birthYear || Infinity);
+    return aDate.year - bDate.year;
   }
 }
