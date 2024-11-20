@@ -18,7 +18,7 @@ export class FriendListComponent implements OnInit {
     try {
       return [...this.friendStore.getFriends()].sort(this.sortByBirthday);
     } catch (error) {
-      console.error('Error fetching friends:', error);
+      //console.error('Error fetching friends:', error);
       return [];
     }
   });
