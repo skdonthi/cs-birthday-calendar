@@ -1,2 +1,13 @@
-<h1>Hello, {{ title }}</h1>
-<p>Congratulations! Your app is running. 🎉</p>
+<nav class="navbar">
+  <div class="container-fluid">
+    <h1 class="mb-0 py-1">{{ title }}</h1>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="d-flex justify-content-center">
+    <csbc-add-friend></csbc-add-friend>
+    <div class="mx-5"></div>
+    <csbc-friend-list></csbc-friend-list>
+  </div>
+</main>

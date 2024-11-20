@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { AddFriendComponent } from './components/add-friend/add-friend.component';
+import { FriendListComponent } from './components/friend-list/friend-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [],
+  imports: [AddFriendComponent, FriendListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
