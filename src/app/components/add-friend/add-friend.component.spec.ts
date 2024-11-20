@@ -1,9 +1,4 @@
-import {
-  TestBed,
-  ComponentFixture,
-  tick,
-  fakeAsync,
-} from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddFriendComponent } from './add-friend.component';
 import { FriendStore } from '../../stores/friend.store';
