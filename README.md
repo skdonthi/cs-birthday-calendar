@@ -1,27 +1,42 @@
-# CsBirthdayCalendar
+# CS - Birthday Calendar
+
+This is a Single Page Web Application built with Angular to organize friends' birthdays.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js (latest version), Used: v20.9.0
+- npm (latest version), Used: v10.9.0
+- Angular CLI (latest version), Used: v18.2.5
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone the repository and navigate to this project's root folder
+2. Run `npm install` to install dependencies
 
-## Build
+## Running the application
+
+Run `npm start` or `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Running tests
+
+Run `ng test` to execute the unit tests via Karma.
+
+I used Firefox as my default testing browser because I don't use Chrome (I use Brave). If you want to run tests in Chrome then run `ng test --browsers=Chrome`.
+or use Headless versions `ng test --browsers=ChromeHeadless` or `ng test --browsers=FirefoxHeadless`
+
+**Note**: Make sure you install the Firefox or Chrome and add the required environment variable
+
+**for macOS**: I got below error since I do not have Chrome
+
+        Can not find the binary /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+        Please set env variable CHROME_BIN
+
+## Building for production
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Browser Support
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This application supports the newest versions of Chrome, Firefox, and Safari on macOS and Windows computers.
