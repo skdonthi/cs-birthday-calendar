@@ -40,7 +40,9 @@ export const FriendStore = signalStore(
       const storageService = inject(StorageService);
       const storedFriends = storageService.get('friends');
       if (storedFriends) {
-        patchState(store, { friends: JSON.parse(storedFriends) });
+        const friends: Friend[] = JSON.parse(storedFriends);
+        patchState(store, { friends });
+        friends.forEach((f) => store.notifyIfBirthdayIsToday(f));
       } else {
         INITIAL_FRIENDS_LIST.forEach((f) => store.addFriend(f));
       }
