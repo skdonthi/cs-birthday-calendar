@@ -1,41 +1,36 @@
 <div class="card border-0 shadow-sm">
   <div class="card-header">
-    <span class="card-title"
-      ><i class="bi bi-people"></i> Friends' Birthdays</span
-    >
+    <span class="card-title"><i class="bi bi-people"></i> Friends' Birthdays</span>
   </div>
-  <div class="card-body">
-    @if (!sortedFriends().length) {
-    <div class="alert alert-primary" role="alert">Friends list is empty!</div>
-    }
+  <div class="card-body csbc-container-scroll">
     <ul class="list-group list-group-flush">
       @for (friend of sortedFriends(); track $index) {
       <li class="list-group-item">
         <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-person-fill text-primary me-2"></i>
+          <i class="bi bi-person-fill fs-4 text-primary me-2"></i>
           <h6 class="mb-0">{{ friend.firstName }}</h6>
-          @if (isBirthdayToday(friend)) {
-          <span class="text-success mx-2"> ( 🎉 Birthday, today!) </span>
+          @if (friend.isBirthdayToday) {
+          <span class="text-success mx-2"> ( 🎉 Birthday, today <i class="bi bi-balloon-fill text-danger"></i>) </span>
           }
         </div>
         <p class="mb-1">
           Birthday:
           <strong>
-            {{ friend.birthDay }}/{{ friend.birthMonth
-            }}{{ friend.birthYear ? "/" + friend.birthYear : "" }}</strong
+            {{ friend.birthDay }}/{{ friend.birthMonth }}{{ friend.birthYear ? "/" + friend.birthYear : "" }}</strong
           >
         </p>
         <p class="mb-0" style="white-space: nowrap">
-          Days to next birthday:<strong>{{
-            calculateDaysToNextBirthday(friend)
-          }}</strong>
-          @if (friend.birthYear) {
+          Days to next birthday:
+          <strong>{{ friend.daysToNextBirthday }}</strong>
+          @if (friend.age) {
           <span>
-            | Age: <strong>{{ calculateAge(friend) }}</strong>
+            | Age: <strong>{{ friend.age }}</strong>
           </span>
           }
         </p>
       </li>
+      } @empty {
+      <div class="alert alert-primary" role="alert">Friends list is empty!</div>
       }
     </ul>
   </div>

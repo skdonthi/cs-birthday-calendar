@@ -3,5 +3,5 @@ export interface Friend {
   firstName: string;
   birthDay: number;
   birthMonth: number;
-  birthYear?: number;
+  birthYear?: number | null;
 }

@@ -1,11 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
-  AbstractControlOptions,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, AbstractControlOptions } from '@angular/forms';
 import { numberRangeValidator } from '../../utils/custom-validators';
 import { CommonModule } from '@angular/common';
 import { FriendStore } from '../../stores/friend.store';
@@ -27,19 +21,10 @@ export class AddFriendComponent {
     this.currentYear = new Date().getFullYear();
     this.addFriendForm = this.fb.group(
       {
-        firstName: [
-          '',
-          [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)],
-        ],
+        firstName: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
         birthDay: [null, [Validators.required, numberRangeValidator(1, 31, 2)]],
-        birthMonth: [
-          null,
-          [Validators.required, numberRangeValidator(1, 12, 2)],
-        ],
-        birthYear: [
-          null,
-          [numberRangeValidator(this.startYear, this.currentYear, 4)],
-        ],
+        birthMonth: [null, [Validators.required, numberRangeValidator(1, 12, 2)]],
+        birthYear: [null, [numberRangeValidator(this.startYear, this.currentYear, 4)]],
       },
       { validators: [this.dateValidator] } as AbstractControlOptions
     );
@@ -69,14 +54,17 @@ export class AddFriendComponent {
       return null;
     }
 
-    // Full validation with year
     const numYear = parseInt(year, 10);
-    const date = new Date(numYear, numMonth - 1, numDay);
+    const inputDate = new Date(numYear, numMonth - 1, numDay);
+    const today = new Date();
+    if (inputDate > today) {
+      return { futureDate: true };
+    }
 
     if (
-      date.getFullYear() === numYear &&
-      date.getMonth() === numMonth - 1 &&
-      date.getDate() === numDay
+      inputDate.getFullYear() === numYear &&
+      inputDate.getMonth() === numMonth - 1 &&
+      inputDate.getDate() === numDay
     ) {
       return null; // Date is valid
     } else {

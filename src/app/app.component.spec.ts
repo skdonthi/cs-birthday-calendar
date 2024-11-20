@@ -1,21 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { StorageService } from './services/storage.service';
 import { ToastrService } from 'ngx-toastr';
 
 describe('AppComponent', () => {
-  let storageServiceMock: jasmine.SpyObj<StorageService>;
   let toastrMock: jasmine.SpyObj<ToastrService>;
   beforeEach(async () => {
-    storageServiceMock = jasmine.createSpyObj('StorageService', ['get', 'set']);
     toastrMock = jasmine.createSpyObj('ToastrService', ['success']);
 
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        { provide: StorageService, useValue: storageServiceMock },
-        { provide: ToastrService, useValue: toastrMock },
-      ],
+      providers: [{ provide: ToastrService, useValue: toastrMock }],
     }).compileComponents();
   });
 
@@ -35,8 +29,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h2')?.textContent).toContain(
-      'CS Birthday Calendar'
-    );
+    expect(compiled.querySelector('h2')?.textContent).toContain('CS Birthday Calendar');
   });
 });

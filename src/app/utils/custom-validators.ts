@@ -1,10 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-export function numberRangeValidator(
-  min: number,
-  max: number,
-  maxDigits: number
-): ValidatorFn {
+export function numberRangeValidator(min: number, max: number, maxDigits: number): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (control.value === null || control.value === '') {
       return null;

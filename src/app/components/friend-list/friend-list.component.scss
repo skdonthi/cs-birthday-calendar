@@ -1,0 +1,25 @@
+@import "../../../../styles-variables";
+
+.csbc-container-scroll {
+  max-height: 600px;
+  text-wrap: nowrap;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: $primary #f3f3f3;
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #f3f3f3;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $primary;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: darken($primary, 10%);
+  }
+}

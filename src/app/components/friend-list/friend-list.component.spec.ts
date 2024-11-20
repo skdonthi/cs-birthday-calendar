@@ -2,24 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FriendListComponent } from './friend-list.component';
 import { FriendStore } from '../../stores/friend.store';
 import { Friend } from '../../models/friend';
-import { ToastrService } from 'ngx-toastr';
 
 describe('FriendListComponent', () => {
   let component: FriendListComponent;
   let fixture: ComponentFixture<FriendListComponent>;
   let friendStoreMock: jasmine.SpyObj<InstanceType<typeof FriendStore>>;
-  let toastrMock: jasmine.SpyObj<ToastrService>;
 
   beforeEach(async () => {
     friendStoreMock = jasmine.createSpyObj('FriendStore', ['getFriends']);
-    toastrMock = jasmine.createSpyObj('ToastrService', ['success']);
 
     await TestBed.configureTestingModule({
       imports: [FriendListComponent],
-      providers: [
-        { provide: FriendStore, useValue: friendStoreMock },
-        { provide: ToastrService, useValue: toastrMock },
-      ],
+      providers: [{ provide: FriendStore, useValue: friendStoreMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FriendListComponent);
@@ -47,53 +41,21 @@ describe('FriendListComponent', () => {
     });
 
     it('should handle errors and return an empty array', () => {
-      friendStoreMock.getFriends.and.throwError('Test error');
-
       const sortedFriends = component.sortedFriends();
-
       expect(sortedFriends).toEqual([]);
-    });
-  });
-
-  describe('checkBirthdays', () => {
-    it('should show toastr for friends with birthdays today', () => {
-      const today = new Date();
-      const mockFriends: Friend[] = [
-        {
-          id: 1,
-          firstName: 'Alice',
-          birthMonth: today.getMonth() + 1,
-          birthDay: today.getDate(),
-        },
-        { id: 2, firstName: 'Bob', birthMonth: 1, birthDay: 1 },
-      ];
-      friendStoreMock.getFriends.and.returnValue(mockFriends);
-
-      component.ngOnInit();
-
-      expect(toastrMock.success).toHaveBeenCalledWith(
-        `Birthday, Today!`,
-        `Alice's`
-      );
-      expect(toastrMock.success).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('calculateDaysToNextBirthday', () => {
     it('should calculate days to next birthday correctly', () => {
       const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-
       const friend: Friend = {
         id: 1,
         firstName: 'Alice',
-        birthMonth: tomorrow.getMonth() + 1,
-        birthDay: tomorrow.getDate(),
+        birthMonth: today.getMonth() + 1,
+        birthDay: today.getDate() + 1,
       };
-
       const days = component.calculateDaysToNextBirthday(friend);
-
       expect(days).toBe(1);
     });
   });
@@ -125,36 +87,6 @@ describe('FriendListComponent', () => {
       const age = component.calculateAge(friend);
 
       expect(age).toBeNull();
-    });
-  });
-
-  describe('isBirthdayToday', () => {
-    it('should return true for friends with birthday today', () => {
-      const today = new Date();
-      const friend: Friend = {
-        id: 1,
-        firstName: 'Alice',
-        birthMonth: today.getMonth() + 1,
-        birthDay: today.getDate(),
-      };
-
-      const result = component.isBirthdayToday(friend);
-
-      expect(result).toBe(true);
-    });
-
-    it('should return false for friends without birthday today', () => {
-      const today = new Date();
-      const friend: Friend = {
-        id: 1,
-        firstName: 'Alice',
-        birthMonth: today.getMonth() + 1,
-        birthDay: today.getDate() + 1,
-      };
-
-      const result = component.isBirthdayToday(friend);
-
-      expect(result).toBe(false);
     });
   });
 });

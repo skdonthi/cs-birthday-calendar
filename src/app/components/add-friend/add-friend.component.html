@@ -1,30 +1,22 @@
 <div class="card border-0 shadow-sm" style="width: 30rem">
   <div class="card-header">
-    <span class="card-title"
-      ><i class="bi bi-person-add"></i> Add a Friend</span
-    >
+    <span class="card-title"><i class="bi bi-person-add"></i> Add a Friend</span>
   </div>
   <div class="card-body">
     <!-- <pre>Form: {{ addFriendForm.value | json }}</pre>
     <pre>Erros: {{ addFriendForm.errors | json }}</pre> -->
     <form [formGroup]="addFriendForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="firstName" class="form-label"
-          >First Name<span class="mandatory-field"></span
-        ></label>
+        <label for="firstName" class="form-label">First Name<span class="mandatory-field"></span></label>
         <input
           type="text"
           class="form-control"
           id="firstName"
           formControlName="firstName"
           placeholder="Enter first name"
-          [class.is-invalid]="
-            firstNameCtrl?.invalid &&
-            (firstNameCtrl?.dirty || firstNameCtrl?.touched)
-          "
+          [class.is-invalid]="firstNameCtrl?.invalid && (firstNameCtrl?.dirty || firstNameCtrl?.touched)"
         />
-        @if (firstNameCtrl?.invalid && (firstNameCtrl?.dirty ||
-        firstNameCtrl?.touched)) {
+        @if (firstNameCtrl?.invalid && (firstNameCtrl?.dirty || firstNameCtrl?.touched)) {
         <div class="invalid-feedback">
           @if (firstNameCtrl?.hasError('required')) {
           <span>First name is required</span>
@@ -35,11 +27,9 @@
         }
       </div>
 
-      <div class="row mb-3">
-        <div class="col-4 mb-3">
-          <label for="birthDay" class="form-label"
-            >Day<span class="mandatory-field"></span
-          ></label>
+      <div class="row mb-2">
+        <div class="col-4">
+          <label for="birthDay" class="form-label">Day<span class="mandatory-field"></span></label>
           <input
             type="text"
             class="form-control"
@@ -48,13 +38,9 @@
             placeholder="DD"
             maxlength="2"
             (input)="formatInput('birthDay', $event, 2)"
-            [class.is-invalid]="
-              birthdayCtrl?.invalid &&
-              (birthdayCtrl?.dirty || birthdayCtrl?.touched)
-            "
+            [class.is-invalid]="birthdayCtrl?.invalid && (birthdayCtrl?.dirty || birthdayCtrl?.touched)"
           />
-          @if (birthdayCtrl?.invalid && (birthdayCtrl?.dirty ||
-          birthdayCtrl?.touched)) {
+          @if (birthdayCtrl?.invalid && (birthdayCtrl?.dirty || birthdayCtrl?.touched)) {
           <div class="invalid-feedback">
             @if (birthdayCtrl?.hasError('required')) {
             <span>Day is required</span>
@@ -68,9 +54,7 @@
         </div>
 
         <div class="col-4 mb-3">
-          <label for="birthMonth" class="form-label"
-            >Month<span class="mandatory-field"></span
-          ></label>
+          <label for="birthMonth" class="form-label">Month<span class="mandatory-field"></span></label>
           <input
             type="text"
             class="form-control"
@@ -79,13 +63,9 @@
             placeholder="MM"
             maxlength="2"
             (input)="formatInput('birthMonth', $event, 2)"
-            [class.is-invalid]="
-              birthMonthCtrl?.invalid &&
-              (birthMonthCtrl?.dirty || birthMonthCtrl?.touched)
-            "
+            [class.is-invalid]="birthMonthCtrl?.invalid && (birthMonthCtrl?.dirty || birthMonthCtrl?.touched)"
           />
-          @if (birthMonthCtrl?.invalid && (birthMonthCtrl?.dirty ||
-          birthMonthCtrl?.touched)) {
+          @if (birthMonthCtrl?.invalid && (birthMonthCtrl?.dirty || birthMonthCtrl?.touched)) {
 
           <div class="invalid-feedback">
             @if (birthMonthCtrl?.hasError('required')) {
@@ -142,20 +122,14 @@
             placeholder="YYYY"
             maxlength="4"
             (input)="formatInput('birthYear', $event, 4)"
-            [class.is-invalid]="
-              birthYearCtrl?.invalid &&
-              (birthYearCtrl?.dirty || birthYearCtrl?.touched)
-            "
+            [class.is-invalid]="birthYearCtrl?.invalid && (birthYearCtrl?.dirty || birthYearCtrl?.touched)"
           />
-          @if (birthYearCtrl?.invalid && (birthYearCtrl?.dirty ||
-          birthYearCtrl?.touched)) {
+          @if (birthYearCtrl?.invalid && (birthYearCtrl?.dirty || birthYearCtrl?.touched)) {
           <div class="invalid-feedback">
             @if (birthYearCtrl?.hasError('invalidFormat')) {
             <span>Must be 4 digits</span>
             } @else if (birthYearCtrl?.hasError('outOfRange')) {
-            <span>
-              Year must be between {{ startYear }} and {{ currentYear }}
-            </span>
+            <span> Year must be between {{ startYear }} and {{ currentYear }} </span>
             }
           </div>
           }
@@ -167,11 +141,11 @@
         <!-- Invalid date for the selected month and year, for example: a non-leap year/day -->
         Invalid date selection
       </div>
+      } @else if(addFriendForm.hasError('futureDate')){
+      <div class="invalid-feedback d-block">Future date is invalid.</div>
       }
       <!-- [disabled]="!addFriendForm.valid" -->
-      <button type="submit" class="btn btn-primary w-100 text-uppercase">
-        Add Friend
-      </button>
+      <button type="submit" class="btn btn-primary w-100 text-uppercase">Add Friend</button>
     </form>
   </div>
 </div>

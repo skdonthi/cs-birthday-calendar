@@ -161,6 +161,17 @@ describe('AddFriendComponent', () => {
         expect(component.addFriendForm.hasError('invalidDate')).toBeTruthy();
       });
     });
+
+    it('should validate future dates', () => {
+      component.addFriendForm.patchValue({
+        firstName: 'lorem',
+        birthDay: '30',
+        birthMonth: '11',
+        birthYear: '2024',
+      });
+      expect(component.addFriendForm.valid).toBeFalsy();
+      expect(component.addFriendForm.hasError('futureDate')).toBeTruthy();
+    });
   });
 
   describe('Form Submission', () => {
