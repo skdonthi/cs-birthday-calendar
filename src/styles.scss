@@ -1,1 +1,12 @@
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 @import "bootstrap/scss/bootstrap";
+@import "../styles-variables.scss";
+
+body {
+  background-color: $bg-body;
+}
+
+.card-header {
+  background: $primary;
+  color: #ffffff;
+}

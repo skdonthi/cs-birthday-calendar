@@ -1,1 +1,177 @@
-<p>add-friend works!</p>
+<div class="card border-0 shadow-sm">
+  <div class="card-header">
+    <span class="card-title"
+      ><i class="bi bi-person-add"></i> Add a Friend</span
+    >
+  </div>
+  <div class="card-body">
+    <!-- <pre>Form: {{ addFriendForm.value | json }}</pre>
+    <pre>Erros: {{ addFriendForm.errors | json }}</pre> -->
+    <form [formGroup]="addFriendForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="firstName" class="form-label"
+          >First Name<span class="mandatory-field"></span
+        ></label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+          placeholder="Enter first name"
+          [class.is-invalid]="
+            firstNameCtrl?.invalid &&
+            (firstNameCtrl?.dirty || firstNameCtrl?.touched)
+          "
+        />
+        @if (firstNameCtrl?.invalid && (firstNameCtrl?.dirty ||
+        firstNameCtrl?.touched)) {
+        <div class="invalid-feedback">
+          @if (firstNameCtrl?.hasError('required')) {
+          <span>First name is required</span>
+          } @else if (firstNameCtrl?.hasError('pattern')) {
+          <span> Only letters are allowed </span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-4 mb-3">
+          <label for="birthDay" class="form-label"
+            >Day<span class="mandatory-field"></span
+          ></label>
+          <input
+            type="text"
+            class="form-control"
+            id="birthDay"
+            formControlName="birthDay"
+            placeholder="DD"
+            maxlength="2"
+            (input)="formatInput('birthDay', $event, 2)"
+            [class.is-invalid]="
+              birthdayCtrl?.invalid &&
+              (birthdayCtrl?.dirty || birthdayCtrl?.touched)
+            "
+          />
+          @if (birthdayCtrl?.invalid && (birthdayCtrl?.dirty ||
+          birthdayCtrl?.touched)) {
+          <div class="invalid-feedback">
+            @if (birthdayCtrl?.hasError('required')) {
+            <span>Day is required</span>
+            } @else if (birthdayCtrl?.hasError('invalidFormat')) {
+            <span>Must be 2 digits</span>
+            } @else if (birthdayCtrl?.hasError('outOfRange')) {
+            <span> Day must be between 01 and 31 </span>
+            }
+          </div>
+          }
+        </div>
+
+        <div class="col-4 mb-3">
+          <label for="birthMonth" class="form-label"
+            >Month<span class="mandatory-field"></span
+          ></label>
+          <input
+            type="text"
+            class="form-control"
+            id="birthMonth"
+            formControlName="birthMonth"
+            placeholder="MM"
+            maxlength="2"
+            (input)="formatInput('birthMonth', $event, 2)"
+            [class.is-invalid]="
+              birthMonthCtrl?.invalid &&
+              (birthMonthCtrl?.dirty || birthMonthCtrl?.touched)
+            "
+          />
+          @if (birthMonthCtrl?.invalid && (birthMonthCtrl?.dirty ||
+          birthMonthCtrl?.touched)) {
+
+          <div class="invalid-feedback">
+            @if (birthMonthCtrl?.hasError('required')) {
+            <span>Month is required</span>
+            } @else if(birthMonthCtrl?.hasError('invalidFormat')) {
+            <span> Must be atmost 2 digits </span>
+            } @else if(birthMonthCtrl?.hasError('outOfRange')) {
+            <span> Month must be between 01 and 12 </span>
+            }
+          </div>
+          }
+        </div>
+
+        <!-- <div class="col-4 mb-3">
+          <label for="birthMonth" class="form-label"
+            >Month<span class="mandatory-field"></span
+          ></label>
+
+          <select
+            class="form-select"
+            id="birthMonth"
+            formControlName="birthMonth"
+            [class.is-invalid]="
+              birthMonthCtrl?.invalid &&
+              (birthMonthCtrl?.dirty || birthMonthCtrl?.touched)
+            "
+          >
+            <option [value]="null">MM</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="003">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          @if (birthMonthCtrl?.hasError('required')) {
+          <div class="invalid-feedback">Month is required</div>
+          }
+        </div> -->
+
+        <div class="col-4 mb-3">
+          <label for="birthYear" class="form-label">Year</label>
+          <input
+            type="text"
+            class="form-control"
+            id="birthYear"
+            formControlName="birthYear"
+            placeholder="YYYY"
+            maxlength="4"
+            (input)="formatInput('birthYear', $event, 4)"
+            [class.is-invalid]="
+              birthYearCtrl?.invalid &&
+              (birthYearCtrl?.dirty || birthYearCtrl?.touched)
+            "
+          />
+          @if (birthYearCtrl?.invalid && (birthYearCtrl?.dirty ||
+          birthYearCtrl?.touched)) {
+          <div class="invalid-feedback">
+            @if (birthYearCtrl?.hasError('invalidFormat')) {
+            <span>Must be 4 digits</span>
+            } @else if (birthYearCtrl?.hasError('outOfRange')) {
+            <span>
+              Year must be between {{ startYear }} and {{ currentYear }}
+            </span>
+            }
+          </div>
+          }
+        </div>
+      </div>
+
+      @if (addFriendForm.hasError('invalidDate')) {
+      <div class="invalid-feedback d-block">
+        <!-- Invalid date for the selected month and year, for example: a non-leap year/day -->
+        Invalid date selection
+      </div>
+      }
+      <!-- [disabled]="!addFriendForm.valid" -->
+      <button type="submit" class="btn btn-primary w-100 text-uppercase">
+        Add Friend
+      </button>
+    </form>
+  </div>
+</div>
