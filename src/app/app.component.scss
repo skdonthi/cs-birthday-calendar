@@ -1,0 +1,9 @@
+@import "../../styles-variables";
+
+.header {
+  background: $primary;
+  color: $bg-body;
+  h2 {
+    font-weight: 300;
+  }
+}
