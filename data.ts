@@ -16,7 +16,7 @@ export const INITIAL_FRIENDS_LIST: Friend[] = [
     id: 1732112113840,
   },
   {
-    firstName: 'cs-bc',
+    firstName: 'CS birthday calendar',
     birthDay: today.getDate(),
     birthMonth: today.getMonth() + 1,
     birthYear: null,
